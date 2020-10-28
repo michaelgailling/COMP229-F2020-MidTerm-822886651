@@ -46,7 +46,7 @@ router.post('/add', (req, res, next) => {
     "Author" : req.body.author
   });
 
-  books.create(newBook, (err,book) => {
+  book.create(newBook, (err,book) => {
     if(err)
       {
           console.error(err);
@@ -65,7 +65,7 @@ router.get('/:id', (req, res, next) => {
 
   let id = req.params.id;
 
-  books.findById(id, (err, currentBook) => {
+  book.findById(id, (err, currentBook) => {
       if(err)
       {
           console.error(err);
@@ -92,7 +92,7 @@ router.post('/:id', (req, res, next) => {
     "Author" : req.body.author
   });
 
-  books.updateOne({_id:id}, updatedBook, (err )=> {
+  book.updateOne({_id:id}, updatedBook, (err )=> {
     if(err)
     {
         console.error(err);
@@ -111,7 +111,7 @@ router.get('/delete/:id', (req, res, next) => {
 
   let id = req.params.id;
 
-  books.remove({_id:id}, (err)=>{
+  book.remove({_id:id}, (err)=>{
       if(err)
       {
           console.error(err);
