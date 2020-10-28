@@ -37,7 +37,7 @@ router.get('/add', (req, res, next) => {
 
 // POST process the Book Details page and create a new Book - CREATE
 router.post('/add', (req, res, next) => {
-
+  //Create an object to hold book data
   let newBook = book({
     "Title" : req.body.title,
     "Description" : "",
@@ -45,7 +45,7 @@ router.post('/add', (req, res, next) => {
     "Genre" : req.body.genre,
     "Author" : req.body.author
   });
-
+  //Create a new book record with the supplied data
   book.create(newBook, (err,book) => {
     if(err)
       {
@@ -62,9 +62,9 @@ router.post('/add', (req, res, next) => {
 
 // GET the Book Details page in order to edit an existing Book
 router.get('/:id', (req, res, next) => {
-
+  
   let id = req.params.id;
-
+  //Find the book based on record id
   book.findById(id, (err, currentBook) => {
       if(err)
       {
@@ -83,6 +83,7 @@ router.post('/:id', (req, res, next) => {
 
   let id = req.params.id;
 
+  //Create object to hold updated book data
   let updatedBook = book({
     "_id": id,
     "Title" : req.body.title,
@@ -92,6 +93,7 @@ router.post('/:id', (req, res, next) => {
     "Author" : req.body.author
   });
 
+  //Update the book with the supplied information based on the record id
   book.updateOne({_id:id}, updatedBook, (err )=> {
     if(err)
     {
@@ -111,6 +113,7 @@ router.get('/delete/:id', (req, res, next) => {
 
   let id = req.params.id;
 
+  //Delete record based on record id
   book.remove({_id:id}, (err)=>{
       if(err)
       {
